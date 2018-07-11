@@ -9,9 +9,11 @@
 
 import curses
 import math
+import os
 
 import rospy
 from geometry_msgs.msg import Twist
+
 
 class Velocity(object):
 
@@ -196,9 +198,9 @@ class SimpleKeyTeleop():
         curses.KEY_RIGHT: ( 0, -1),
     }
 
-    voice_bindings = {
-        "move follow":    ( 1,  0),
-        "follow":    ( 1,  0),
+    voice_movements = {
+        "move front":    ( 1,  0),
+        "front":    ( 1,  0),
         "move back":  (-1,  0),
         "back":  (-1,  0),
         "move backward":  (-1,  0),
@@ -211,16 +213,29 @@ class SimpleKeyTeleop():
         "stop": (0,0)
     }
 
+    voice_actions = {
+        "open hand": "rosrun ",
+        "water": "rosrun ",
+        "cereal": 'rosrun ',
+        "soft drinks": 'rosrun ',
+        "follow": 'rosrun '
+    }
+
     def ourmethod(self, msg):
         rate = rospy.Rate(self._hz)
         rospy.loginfo(msg.data)
-        if msg.data in self.voice_bindings:
+        if msg.data in self.voice_movements:
             for _ in range(15):
-                l, a = self.voice_bindings[msg.data]
+                l, a = self.voice_movements[msg.data]
                 self._angular = a
                 self._linear = l
                 self._publish()
                 rate.sleep()
+                if(msg.data == "stop"):
+                    break
+        if msg.data in  self.voice_actions:
+            os.system(self.voice_actions[msg.data])
+
 
 
     def run(self):

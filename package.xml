@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <name>GAZEBRAS_key_teleop</name>
+  <version>1.0.0</version>
+  <description>A Voice-based interface to send a robot movement commands. Created from original teleop package</description>
+
+  <maintainer email="dapd@cin.ufpe.br">Diogo Dantas</maintainer>
+  <author email="dapd@cin.ufpe.br">Diogo Dantas</author>
+  <author email="mgm4@cin.ufpe.br">Mateus Machado</author>
+  <author email="vbas@cin.ufpe.br">Vinicius Bezerra</author>
+
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>rospy</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+</package>
